@@ -1,5 +1,7 @@
 package webproduct.service.com.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +12,16 @@ import webproduct.service.com.repository.ProdutoRepository;
 public class ProdutoService {
 	
 	@Autowired
-	private ProdutoRepository produto;
+	private ProdutoRepository produtoRepository;
 	
-	
-	public String findByCodigo(Produto produto) {
+	public Produto findByProdutoId(Integer id) {
+		Optional<Produto> prod=this.produtoRepository.findById(id);
 		
-		
-		
-		return null;
-				
+		if (prod.isPresent()&&!prod.isEmpty()) {
+			Produto produto=prod.get();
+			return produto;
+		}	
+		return null;			
 		
 	}
 	
